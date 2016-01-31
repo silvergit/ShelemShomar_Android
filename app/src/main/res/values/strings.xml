@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Shelem Counter</string>
+    <string name="first_group_name">First group name</string>
+    <string name="second_group_name">Second group name</string>
+    <string name="txt_double_nagative">Double negative</string>
+    <string name="btn_start_game_txt">Start Game</string>
+    <string name="str_game_type">Game type</string>
+    <string name="title_activity_game_chart">GameChart</string>
+    <string name="str_start_round">Start round</string>
+    <string name="str_end_round">End round</string>
+    <string name="txt_alter_select_group">Starter team</string>
+    <string name="shelem">Shelem</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="lang_eng_txt">English</string>
+    <string name="lang_fa_txt">Farsi</string>
+    <string name="restart_message">Restart to apply changes</string>
+    <string name="prompt_delete">Do you want to remove last item?</string>
+    <string name="delete_title">Remove Item</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="mnu_help">Help</string>
+    <string name="mnu_lang">Language</string>
+    <string name="mnu_about">About</string>
+    <string name="mnu_share">Share</string>
+    <string name="about_title">About...</string>
+    <string name="company_name">Dolphin Soft</string>
+    <string name="about_author_name">Developer : Ali reza pazhouhesh</string>
+    <string name="email" translatable="false">pazhouhesh.ali@gmail.com</string>
+    <string name="close">Close</string>
+    <string name="vs" translatable="false">VS</string>
+    <string name="txv_choose_language_txt">Application language</string>
+    <string name="comming_soon">Comming soon...</string>
+    <string name="mnu_theme">Theme</string>
+    <string name="exit">Exit</string>
+
+</resources>

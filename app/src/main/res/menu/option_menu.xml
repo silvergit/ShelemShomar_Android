@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/mnu_lang"
+        android:title="@string/mnu_lang" />
+
+    <item android:id="@+id/mnu_theme"
+        android:title="@string/mnu_theme" />
+
+    <item android:id="@+id/mnu_help"
+        android:title="@string/mnu_help" />
+
+    <item android:id="@+id/mnu_about"
+        android:title="@string/mnu_about" />
+
+    <item android:id="@+id/mnu_exit"
+        android:title="@string/exit" />
+
+</menu>

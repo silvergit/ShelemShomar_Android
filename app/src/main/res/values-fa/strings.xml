@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">شلم شمار</string>
+    <string name="first_group_name">نام گروه اول </string>
+    <string name="second_group_name">نام گروه دوم </string>
+    <string name="txt_double_nagative">دوبل منفی</string>
+    <string name="btn_start_game_txt">شروع بازی</string>
+    <string name="str_game_type">نوع بازی</string>
+    <string name="title_activity_game_chart">جدول بازی</string>
+    <string name="str_start_round">شروع دست</string>
+    <string name="str_end_round">اتمام دست</string>
+    <string name="txt_alter_select_group">تیم شروع کننده</string>
+    <string name="shelem">شلم</string>
+    <string name="ok">تایید</string>
+    <string name="cancel">انصراف</string>
+    <string name="lang_eng_txt">انگلیسی</string>
+    <string name="lang_fa_txt">فارسی</string>
+    <string name="restart_message">برای اعمال تغییرات برنامه را مجددا راه اندازی کنید</string>
+    <string name="prompt_delete">مورد آخر را حذف می‌کنید؟</string>
+    <string name="delete_title">حذف</string>
+    <string name="yes">بله</string>
+    <string name="no">نه</string>
+    <string name="mnu_help">راهنما</string>
+    <string name="mnu_about">درباره</string>
+    <string name="mnu_share">اشتراک</string>
+    <string name="mnu_lang">زبان</string>
+    <string name="about_title">درباره...</string>
+    <string name="company_name">دلفین سافت</string>
+    <string name="about_author_name">برنامه نویس : علیرضا پژوهش</string>
+    <string name="close">بستن</string>
+    <string name="txv_choose_language_txt">زبان برنامه</string>
+    <string name="comming_soon">به زودی...</string>
+    <string name="mnu_theme">قالب</string>
+    <string name="exit">بستن برنامه</string>
+
+</resources>
