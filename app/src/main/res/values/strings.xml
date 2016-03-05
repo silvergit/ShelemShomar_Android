@@ -33,5 +33,10 @@
     <string name="comming_soon">Comming soon...</string>
     <string name="mnu_theme">Theme</string>
     <string name="exit">Exit</string>
+    <string name="new_game">New game</string>
+    <string name="win_this_game_str">win the game.</string>
+    <string name="do_you_want_new_game">Do you want to start new game?</string>
+    <string name="game_over_str">Game over</string>
+    <string name="version_txt">Version :</string>
 
 </resources>

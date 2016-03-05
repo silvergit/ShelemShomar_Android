@@ -31,5 +31,10 @@
     <string name="comming_soon">به زودی...</string>
     <string name="mnu_theme">قالب</string>
     <string name="exit">بستن برنامه</string>
+    <string name="new_game">بازی جدید</string>
+    <string name="win_this_game_str">برنده این بازی است.</string>
+    <string name="do_you_want_new_game">میخواهید یم بازی جدید را شروع کنید؟</string>
+    <string name="game_over_str">بازی تمام شد</string>
+    <string name="version_txt">نسخه : </string>
 
 </resources>

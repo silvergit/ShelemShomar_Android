@@ -41,7 +41,7 @@
         <NumberPicker
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/numberPicker3"
+            android:id="@+id/numberPicker1"
             android:layout_marginLeft="@dimen/margin"/>
 
         <NumberPicker
@@ -53,7 +53,7 @@
         <NumberPicker
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/numberPicker1"
+            android:id="@+id/numberPicker3"
             android:layout_marginLeft="@dimen/margin"/>
 
     </LinearLayout>

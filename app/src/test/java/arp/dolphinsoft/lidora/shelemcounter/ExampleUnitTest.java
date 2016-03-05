@@ -1,4 +1,4 @@
-package arp.dolphinsoft.lidora.shelemcounter;
+package arp.dolphinsoft.lidora.shelemshomar;
 
 import org.junit.Test;
 
