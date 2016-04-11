@@ -55,14 +55,13 @@ public class ListViewAdapter extends BaseAdapter {
         LayoutInflater inflater=activity.getLayoutInflater();
 
         if(convertView == null){
-
             convertView=inflater.inflate(arp.dolphinsoft.lidora.shelemshomar.R.layout.lay_column_row, null);
-
-            txt_lst_first_group_name =(TextView) convertView.findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.lst_first_group);
-            txt_lst_round_read =(TextView) convertView.findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.lst_round_read);
-            txt_lst_second_group_name =(TextView) convertView.findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.lst_second_group);
-            txt_lst_arrow =(TextView) convertView.findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.lst_arrow);
         }
+
+        txt_lst_first_group_name =(TextView) convertView.findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.lst_first_group);
+        txt_lst_round_read =(TextView) convertView.findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.lst_round_read);
+        txt_lst_second_group_name =(TextView) convertView.findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.lst_second_group);
+        txt_lst_arrow =(TextView) convertView.findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.lst_arrow);
 
         HashMap<String, String> map=list.get(position);
         txt_lst_first_group_name.setText(map.get(Constants.FIRST_COLUMN));

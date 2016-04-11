@@ -15,7 +15,7 @@
     <string name="lang_eng_txt">انگلیسی</string>
     <string name="lang_fa_txt">فارسی</string>
     <string name="restart_message">برای اعمال تغییرات برنامه را مجددا راه اندازی کنید</string>
-    <string name="prompt_delete">مورد آخر را حذف می‌کنید؟</string>
+    <string name="prompt_delete">این مورد را حذف می‌کنید؟</string>
     <string name="delete_title">حذف</string>
     <string name="yes">بله</string>
     <string name="no">نه</string>
@@ -36,5 +36,7 @@
     <string name="do_you_want_new_game">میخواهید یم بازی جدید را شروع کنید؟</string>
     <string name="game_over_str">بازی تمام شد</string>
     <string name="version_txt">نسخه : </string>
+    <string name="game_duration">زمان بازی</string>
+    <string name="exit_question">از بازی خارج می‌شوید؟</string>
 
 </resources>

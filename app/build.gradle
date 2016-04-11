@@ -5,9 +5,10 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId 'arp.dolphinsoft.lidora.shelemshomar'
-        minSdkVersion 11
+        minSdkVersion 8
         targetSdkVersion 23
-        versionName '1.1'
+        versionName '1.8'
+        versionCode 18
     }
     buildTypes {
         release {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="arp.dolphinsoft.lidora.shelemshomar"
-    android:versionCode="2" android:versionName="1.1">
+    android:versionCode="18" android:versionName="1.8">
 
     <application
         android:allowBackup="true"
@@ -11,20 +11,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="arp.dolphinsoft.lidora.shelemshomar.MainActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="arp.dolphinsoft.lidora.shelemshomar.GameChartActivity"
-            android:configChanges="orientation"
-            android:label="@string/title_activity_game_chart"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_activity_game_chart" />
     </application>
 
 </manifest>

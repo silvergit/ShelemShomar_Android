@@ -15,7 +15,7 @@
     <string name="lang_eng_txt">English</string>
     <string name="lang_fa_txt">Farsi</string>
     <string name="restart_message">Restart to apply changes</string>
-    <string name="prompt_delete">Do you want to remove last item?</string>
+    <string name="prompt_delete">Do you want to remove this item?</string>
     <string name="delete_title">Remove Item</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -38,5 +38,7 @@
     <string name="do_you_want_new_game">Do you want to start new game?</string>
     <string name="game_over_str">Game over</string>
     <string name="version_txt">Version :</string>
+    <string name="game_duration">Game duration</string>
+    <string name="exit_question">Do you want to exit?</string>
 
 </resources>

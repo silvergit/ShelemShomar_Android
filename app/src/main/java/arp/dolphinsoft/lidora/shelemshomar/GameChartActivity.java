@@ -1,10 +1,10 @@
 package arp.dolphinsoft.lidora.shelemshomar;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,13 +16,16 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GameChartActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener {
+public class GameChartActivity extends Activity implements View.OnClickListener, AdapterView.OnItemLongClickListener {
 
     TextView txv_first_group_name, txv_first_group_point, txv_vs,
-            txv_second_group_name, txv_second_group_point;
+            txv_second_group_name, txv_second_group_point,
+            txv_game_date, txv_game_time;
     Button btn_start_round, btn_end_round;
 
     private ArrayList<HashMap<String, String>> list;
@@ -35,6 +38,10 @@ public class GameChartActivity extends AppCompatActivity implements View.OnClick
     int team_starter;
     String read_game_points;
     String get_game_points;
+
+    private int second_timer;
+    String time;
+    Thread t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,13 +233,61 @@ public class GameChartActivity extends AppCompatActivity implements View.OnClick
         txv_vs                  = (TextView) findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.txt_header_vs);
         txv_second_group_name   = (TextView) findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.txt_header_second_group_name);
         txv_second_group_point  = (TextView) findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.txt_header_second_group_point);
-        btn_start_round         = (Button) findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.btn_start_round);
-        btn_end_round           = (Button) findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.btn_end_round);
+        btn_start_round         = (Button)   findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.btn_start_round);
+        btn_end_round           = (Button)   findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.btn_end_round);
+        txv_game_date           = (TextView) findViewById(R.id.txv_game_date);
+        txv_game_time           = (TextView) findViewById(R.id.txv_game_time);
 
         list_view =(ListView)findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.list_view);
         list=new ArrayList<HashMap<String,String>>();
 
         btn_end_round.setEnabled(false);
+
+        txv_game_time.setText("00:00");
+
+        t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                second_timer++;
+                                int min = 0;
+                                int sec = 0;
+
+                                if (second_timer >= 60) {
+                                    min = second_timer / 60;
+                                    sec = second_timer % 60;
+                                } else {
+                                    min = 0;
+                                    sec = second_timer;
+                                }
+                                String str_min = String.valueOf(min);
+                                String str_sec = String.valueOf(sec);
+                                if (min < 10) {
+                                    str_min = "0" + min;
+                                }
+                                if (sec < 10) {
+                                    str_sec = "0" + sec;
+                                }
+                                time = str_min + ":" + str_sec;
+                                txv_game_time.setText(time);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        t.start();
+
+        CalendarTool ct = new CalendarTool();
+        txv_game_date.setText(ct.getIranianDate().toString());
     }
 
     @Override
@@ -246,7 +301,7 @@ public class GameChartActivity extends AppCompatActivity implements View.OnClick
 
     private void showAlertForStartRound() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setMessage(arp.dolphinsoft.lidora.shelemshomar.R.string.str_start_round);
+        //dialogBuilder.setMessage(arp.dolphinsoft.lidora.shelemshomar.R.string.str_start_round);
 
         LayoutInflater inflater = this.getLayoutInflater();
 
@@ -362,9 +417,29 @@ public class GameChartActivity extends AppCompatActivity implements View.OnClick
         alertDialog.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setMessage(R.string.exit_question);
+        dialogBuilder.setTitle(R.string.exit);
+
+        dialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                t.interrupt();
+                GameChartActivity.this.finish();
+            }
+        });
+
+        dialogBuilder.setNegativeButton(R.string.cancel, null);
+
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+    }
+
     private void showAlertForEndRound() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setMessage(arp.dolphinsoft.lidora.shelemshomar.R.string.str_end_round);
+        //dialogBuilder.setMessage(arp.dolphinsoft.lidora.shelemshomar.R.string.str_end_round);
 
         LayoutInflater inflater = this.getLayoutInflater();
 
@@ -486,22 +561,23 @@ public class GameChartActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long id) {
         if (btn_start_round.isEnabled()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-            alertDialogBuilder.setIcon(arp.dolphinsoft.lidora.shelemshomar.R.mipmap.ic_launcher);
+            alertDialogBuilder.setIcon(R.mipmap.ic_launcher);
             alertDialogBuilder.setCancelable(true);
-            alertDialogBuilder.setMessage(arp.dolphinsoft.lidora.shelemshomar.R.string.prompt_delete);
-            alertDialogBuilder.setTitle(arp.dolphinsoft.lidora.shelemshomar.R.string.delete_title);
-            alertDialogBuilder.setPositiveButton(arp.dolphinsoft.lidora.shelemshomar.R.string.yes, new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setMessage(R.string.prompt_delete);
+            alertDialogBuilder.setTitle(R.string.delete_title);
+            alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    deleteLastItemFromList();
+                    list.remove(position);
+                    updateListView();
                     showSumPointsInHeader();
                 }
             });
-            alertDialogBuilder.setNegativeButton(arp.dolphinsoft.lidora.shelemshomar.R.string.no, new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     return;

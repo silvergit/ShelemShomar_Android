@@ -1,11 +1,11 @@
 package arp.dolphinsoft.lidora.shelemshomar;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,30 +20,34 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     Button btn_start_game;
     EditText edit_first_group_name, edit_second_group_name;
     CheckBox check_double_negative;
     Spinner spinner_game_type;
-    TextView txt_validation;
+    TextView txt_validation, txv_game_duration;
 
     ArrayList<String> game_type_list;
 
     public static final String my_preferences = "my_prefs";
     public static final String pref_language = "lang_key";
-//    public static final String pref_first_group_name = "first_group_name_key";
-//    public static final String pref_second_group_name = "second_group_name_key";
-//    public static final String pref_game_type = "game_type_key";
-//    public static final String pref_double_negative = "double_negative_key";
+    public static final String pref_first_group_name = "first_group_name_key";
+    public static final String pref_second_group_name = "second_group_name_key";
+    //public static final String pref_game_type = "game_type_key";
+    public static final String pref_double_negative = "double_negative_key";
 
     String lang = "en";
 
     SharedPreferences shared_preferences;
+
+    Thread t_d;
+
+    int game_timer;
+    public static String game_duration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +57,90 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
         }
 
-        getMyPreferences();
+        getMyLangPreferences();
 
         setContentView(arp.dolphinsoft.lidora.shelemshomar.R.layout.activity_main);
 
         initialize();
 
+        getMyPreferences();
+
         btn_start_game.setOnClickListener(this);
+
+        startGameTimer();
+    }
+
+    private void startGameTimer() {
+        t_d = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                game_timer++;
+                                int min = 0;
+                                int sec = 0;
+                                int hour = 0;
+
+                                if (game_timer >= 60) {
+                                    min = game_timer / 60;
+                                    sec = game_timer % 60;
+                                } else {
+                                    min = 0;
+                                    sec = game_timer;
+                                }
+
+                                if (min >= 60) {
+                                    hour = min / 60;
+                                    min = min % 60;
+                                }
+
+                                String str_hour = "0";
+                                String str_min = "0";
+                                String str_sec = "0";
+
+                                try {
+                                    str_hour = String.valueOf(hour);
+                                    str_min = String.valueOf(min);
+                                    str_sec = String.valueOf(sec);
+                                } catch (Exception e) {
+
+                                }
+
+                                if (hour < 10) {
+                                    str_hour = "0" + hour;
+                                }
+                                if (min < 10) {
+                                    str_min = "0" + min;
+                                }
+                                if (sec < 10) {
+                                    str_sec = "0" + sec;
+                                }
+
+                                game_duration = str_hour + ":" + str_min + ":" + str_sec;
+                                txv_game_duration.setText(getResources().getString(R.string.game_duration) +
+                                        " = " +game_duration);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        t_d.start();
+    }
+
+    private void getMyLangPreferences() {
+        shared_preferences = getSharedPreferences(my_preferences, MODE_PRIVATE);
+
+        if (shared_preferences.contains(pref_language)) {
+            changeLanguage(shared_preferences.getString(pref_language, "en"));
+        }
     }
 
     private void getMyPreferences() {
@@ -68,44 +149,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (shared_preferences.contains(pref_language)) {
             changeLanguage(shared_preferences.getString(pref_language, "fa"));
         }
-//
-//        if (shared_preferences.contains(pref_first_group_name)) {
-//            edit_first_group_name.setText(shared_preferences.getString(pref_first_group_name, ""));
-//        }
-//
-//        if (shared_preferences.contains(pref_second_group_name)) {
-//            edit_first_group_name.setText(shared_preferences.getString(pref_second_group_name, ""));
-//        }
-//
-//        if (shared_preferences.contains(pref_double_negative)) {
-//            if (shared_preferences.getString(pref_first_group_name, "").contains("1")) {
-//                check_double_negative.setChecked(true);
-//            } else {
-//                check_double_negative.setChecked(false);
-//            }
-//        }
+
+        if (shared_preferences.contains(pref_first_group_name)) {
+            edit_first_group_name.setText(shared_preferences.getString(pref_first_group_name, ""));
+        }
+
+        if (shared_preferences.contains(pref_second_group_name)) {
+            edit_second_group_name.setText(shared_preferences.getString(pref_second_group_name, ""));
+        }
+
+        if (shared_preferences.contains(pref_double_negative)) {
+            if (shared_preferences.getString(pref_first_group_name, "").contains("1")) {
+                check_double_negative.setChecked(true);
+            } else {
+                check_double_negative.setChecked(false);
+            }
+        }
     }
 
     private void setMyPreferences() {
-//        String double_negative = "0";
+        String double_negative = "0";
 //        String game_type = "165";
-//        String first_group_name = null;
-//        String second_group_name = null;
-//
-//        first_group_name = edit_first_group_name.getText().toString();
-//        second_group_name = edit_second_group_name.getText().toString();
-//
-//        if (check_double_negative.isChecked() == true) {
-//            double_negative = "1";
-//        }
+        String first_group_name = null;
+        String second_group_name = null;
 
-        //game_type = game_type_list.get(spinner_game_type.getSelectedItemPosition());
+        first_group_name = edit_first_group_name.getText().toString();
+        second_group_name = edit_second_group_name.getText().toString();
+
+        if (check_double_negative.isChecked() == true) {
+            double_negative = "1";
+        }
+
+//        game_type = game_type_list.get(spinner_game_type.getSelectedItemPosition());
         SharedPreferences.Editor editor = shared_preferences.edit();
         editor.putString(pref_language, lang);
-//        editor.putString(pref_first_group_name, first_group_name);
-//        editor.putString(pref_second_group_name, second_group_name);
-//        editor.putString(pref_double_negative, double_negative);
-        //editor.putString(pref_game_type, game_type);
+        editor.putString(pref_first_group_name, first_group_name);
+        editor.putString(pref_second_group_name, second_group_name);
+        editor.putString(pref_double_negative, double_negative);
+//        editor.putString(pref_game_type, game_type);
 
         editor.commit();
     }
@@ -127,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         check_double_negative   = (CheckBox)    findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.check_double_negative);
         spinner_game_type       = (Spinner)     findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.spinner_game_type);
         txt_validation          = (TextView)    findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.txt_validation);
+        txv_game_duration       = (TextView)    findViewById(arp.dolphinsoft.lidora.shelemshomar.R.id.txv_game_duration);
 
         game_type_list = new ArrayList<String>();
 
@@ -146,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         check_double_negative.setChecked(false);
 
+        txv_game_duration.setText("Game duration = 00:00:00");
     }
 
     @Override
@@ -173,6 +256,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 game_type = Integer.parseInt(game_type_list.get(
                         spinner_game_type.getSelectedItemPosition()));
+
+                setMyPreferences();
 
                 Intent intent = new Intent(this, GameChartActivity.class);
 

@@ -11,14 +11,6 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:id="@+id/edit_first_group_name"
-        android:hint="@string/first_group_name"/>
-
     <LinearLayout
         android:layout_marginTop="@dimen/extra_margin"
         android:orientation="vertical"
@@ -29,9 +21,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:id="@+id/edit_first_group_name"
+            android:hint="@string/first_group_name"
+            android:background="@drawable/custom_textview_top"/>
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
             android:id="@+id/edit_second_group_name"
             android:layout_weight="1"
-            android:hint="@string/second_group_name" />
+            android:hint="@string/second_group_name"
+            android:background="@drawable/custom_textview_bottom"/>
 
         <TextView
             android:layout_margin="@dimen/margin"
@@ -74,6 +77,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/extra_margin"
         android:text="@string/btn_start_game_txt"
-        android:id="@+id/btn_start_game"/>
+        android:id="@+id/btn_start_game"
+        android:background="@drawable/custom_button"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="@dimen/extra_margin"
+        android:textAlignment="center"
+        android:id="@+id/txv_game_duration"/>
 
 </LinearLayout>
